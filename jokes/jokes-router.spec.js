@@ -14,7 +14,7 @@ describe('/jokes', () => {
         .then(response => {
           request(server)
             .get('/api/jokes')
-            .set('Authorization', response.body.token)
+            .set({ Authorization: response.body.token })
             .expect(200)
         }))
 
@@ -28,7 +28,7 @@ describe('/jokes', () => {
         .then(response => {
           request(server)
             .get('/api/jokes')
-            .set('Authorization', response.body.token)
+            .set({ Authorization: response.body.token })
             .expect([
               {
                 id: '0189hNRf2g',
