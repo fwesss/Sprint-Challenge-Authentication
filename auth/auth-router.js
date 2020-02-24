@@ -33,8 +33,23 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.post('/login', (req, res) => {
-  // implement login
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    const userToLogin = await Users.findBy({ username }).first()
+
+    if (userToLogin && bcrypt.compareSync(password, userToLogin.password)) {
+      res.status(200).json({
+        message: `Welcome ${username}!`,
+        token: generateToken(userToLogin),
+      })
+    } else {
+      res.status(401).json({ message: 'You shall not pass!' })
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'User login failed.', error })
+  }
 })
 
 module.exports = router
