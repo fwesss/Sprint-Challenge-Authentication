@@ -3,7 +3,12 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["import", "optimize-regex"],
+  "plugins": [
+    "import",
+    "optimize-regex",
+    "jest",
+    "jest-formatting"
+  ],
   "extends": [
     "eslint:recommended",
     "eslint-config-prettier",
@@ -12,6 +17,9 @@
     "airbnb-base",
     "eslint:recommended",
     "plugin:node/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:jest-formatting/recommended",
     // must be last
     "plugin:prettier/recommended"
   ],
