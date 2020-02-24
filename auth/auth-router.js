@@ -1,11 +1,9 @@
-import { Router } from 'express'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+const router = require('express').Router()
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
-import jwtSecret from '../secrets'
-import Users from '../users/users.model'
-
-const router = Router()
+const jwtSecret = require('../secrets')
+const Users = require('../users/users.model')
 
 const generateToken = ({ id, username }) =>
   jwt.sign(
@@ -26,9 +24,10 @@ router.post('/register', async (req, res) => {
 
   try {
     const registeredUser = await Users.insert(hashedUser)
-    res
-      .status(201)
-      .json({ user: registeredUser, token: generateToken(registeredUser) })
+    res.status(201).json({
+      user: { id: registeredUser.id, username: registeredUser.username },
+      token: generateToken(registeredUser),
+    })
   } catch (error) {
     res.status(500).json({ message: 'User registration failed.', error })
   }
@@ -38,4 +37,4 @@ router.post('/login', (req, res) => {
   // implement login
 })
 
-export default router
+module.exports = router

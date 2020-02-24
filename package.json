@@ -13,10 +13,9 @@
   },
   "license": "ISC",
   "author": "Lambda School",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
+    "server": "nodemon index.js"
   },
   "husky": {
     "hooks": {

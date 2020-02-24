@@ -1,4 +1,4 @@
-import db from '../database/dbConfig'
+const db = require('../database/dbConfig')
 
 const findBy = filter =>
   db('users')
@@ -10,4 +10,4 @@ const insert = user =>
     .insert(user)
     .then(ids => findBy({ id: ids[0] }).first())
 
-export default { findBy, insert }
+module.exports = { findBy, insert }
